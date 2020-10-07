@@ -6,7 +6,7 @@ project(
     DESCRIPTION "Unity wrapper for KTX-Software"
 )
 
-set(KTX_FEATURE_STATIC ON)
+set(KTX_FEATURE_FORCE_STATIC ON)
 add_subdirectory(KTX-Software)
 
 set(UNITY_TYPE MODULE)
