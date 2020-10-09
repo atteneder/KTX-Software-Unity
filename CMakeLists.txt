@@ -6,6 +6,7 @@ project(
     DESCRIPTION "Unity wrapper for KTX-Software"
 )
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(KTX_FEATURE_FORCE_STATIC ON)
 add_subdirectory(KTX-Software)
 
