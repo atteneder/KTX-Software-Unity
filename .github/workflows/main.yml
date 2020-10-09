@@ -91,36 +91,36 @@ jobs:
         name: ktx_unity_linux_64
         path: build_linux_64/libktx_unity.so
 
-    - name: install_i386_env
-      run: |
-        sudo apt-get update
-        sudo apt install build-essential gcc-multilib g++-multilib
-    - name: configure_linux_32
-      run: cmake . -G Ninja -Bbuild_linux_32 -DCMAKE_TOOLCHAIN_FILE=cmake/linux_i686.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
-    - name: build_linux_32
-      run: cmake --build build_linux_32 --target ktx_unity
-    - uses: actions/upload-artifact@master
-      with:
-        name: ktx_unity_linux_32
-        path: build_linux_32/libktx_unity.so
+    # - name: install_i386_env
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt install build-essential gcc-multilib g++-multilib
+    # - name: configure_linux_32
+    #   run: cmake . -G Ninja -Bbuild_linux_32 -DCMAKE_TOOLCHAIN_FILE=cmake/linux_i686.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+    # - name: build_linux_32
+    #   run: cmake --build build_linux_32 --target ktx_unity
+    # - uses: actions/upload-artifact@master
+    #   with:
+    #     name: ktx_unity_linux_32
+    #     path: build_linux_32/libktx_unity.so
 
-    - name: install_android_ndk
-      run: if [ ! -f android-ndk-r20-linux-x86_64.zip ]; then echo "Installing Android NDK"; wget https://dl.google.com/android/repository/android-ndk-r20-linux-x86_64.zip; unzip android-ndk-r20-linux-x86_64.zip; echo "Installed Android NDK"; else echo "Android NDK already installed"; fi
+    # - name: install_android_ndk
+    #   run: if [ ! -f android-ndk-r21d-linux-x86_64.zip ]; then echo "Installing Android NDK"; wget https://dl.google.com/android/repository/android-ndk-r21d-linux-x86_64.zip; unzip android-ndk-r21d-linux-x86_64.zip; echo "Installed Android NDK"; else echo "Android NDK already installed"; fi
 
-    - name: configure_android_arm64-v8a
-      run: cmake -Bbuild_android_arm64-v8a -DANDROID_ABI=arm64-v8a -DCMAKE_BUILD_TYPE=Release -DANDROID_NDK=android-ndk-r20 -DCMAKE_TOOLCHAIN_FILE="android-ndk-r20/build/cmake/android.toolchain.cmake"
-    - name: build_android_arm64-v8a
-      run: cmake --build build_android_arm64-v8a --target ktx_unity
-    - uses: actions/upload-artifact@master
-      with:
-        name: ktx_unity_android_arm64-v8a
-        path: build_android_arm64-v8a/libktx_unity.so
+    # - name: configure_android_arm64-v8a
+    #   run: cmake -Bbuild_android_arm64-v8a -DANDROID_ABI=arm64-v8a -DCMAKE_BUILD_TYPE=Release -DANDROID_NDK=android-ndk-r21d -DCMAKE_TOOLCHAIN_FILE="android-ndk-r21d/build/cmake/android.toolchain.cmake"
+    # - name: build_android_arm64-v8a
+    #   run: cmake --build build_android_arm64-v8a --target ktx_unity
+    # - uses: actions/upload-artifact@master
+    #   with:
+    #     name: ktx_unity_android_arm64-v8a
+    #     path: build_android_arm64-v8a/libktx_unity.so
 
-    - name: configure_android_armeabi-v7a
-      run: cmake -Bbuild_android_armeabi-v7a -DANDROID_ABI=armeabi-v7a -DCMAKE_BUILD_TYPE=Release -DANDROID_NDK=android-ndk-r20 -DCMAKE_TOOLCHAIN_FILE="android-ndk-r20/build/cmake/android.toolchain.cmake"
-    - name: build_android_armeabi-v7a
-      run: cmake --build build_android_armeabi-v7a --target ktx_unity
-    - uses: actions/upload-artifact@master
-      with:
-        name: ktx_unity_android_armeabi-v7a
-        path: build_android_armeabi-v7a/libktx_unity.so
+    # - name: configure_android_armeabi-v7a
+    #   run: cmake -Bbuild_android_armeabi-v7a -DANDROID_ABI=armeabi-v7a -DCMAKE_BUILD_TYPE=Release -DANDROID_NDK=android-ndk-r21d -DCMAKE_TOOLCHAIN_FILE="android-ndk-r21d/build/cmake/android.toolchain.cmake"
+    # - name: build_android_armeabi-v7a
+    #   run: cmake --build build_android_armeabi-v7a --target ktx_unity
+    # - uses: actions/upload-artifact@master
+    #   with:
+    #     name: ktx_unity_android_armeabi-v7a
+    #     path: build_android_armeabi-v7a/libktx_unity.so
