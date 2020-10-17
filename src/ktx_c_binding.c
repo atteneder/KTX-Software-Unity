@@ -106,6 +106,10 @@ DLL_EXPORT bool ktx_get_has_alpha( ktxTexture2* ktx ) {
     return ktxTexture2_GetNumComponents(ktx) == 4;
 }
 
+DLL_EXPORT uint32_t ktx_get_num_components( ktxTexture2* ktx ) {
+    return ktxTexture2_GetNumComponents(ktx);
+}
+
 DLL_EXPORT KTX_error_code ktx_transcode_ktx(
     ktxTexture2* ktx,
     ktx_transcode_fmt_e outputFormat,
