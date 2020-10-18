@@ -156,7 +156,7 @@ DLL_EXPORT KTX_error_code ktx_copy_data_levels_reverted(
 
     if(ktx->dataSize>dst_length) return KTX_FILE_OVERFLOW;
 
-    for (size_t level = 0; level < ktx->numLevels; level++)
+    for (ktx_uint32_t level = 0; level < ktx->numLevels; level++)
     {
         size_t offset;
         result = ktxTexture_GetImageOffset(
@@ -167,7 +167,7 @@ DLL_EXPORT KTX_error_code ktx_copy_data_levels_reverted(
             &offset
             );
         if(result!=KTX_SUCCESS) return result;
-        size_t level_size = ktxTexture_GetImageSize(ktxTexture(ktx),level);
+        ktx_size_t level_size = ktxTexture_GetImageSize(ktxTexture(ktx),level);
         if(dst_offset+level_size > dst_length) {
             return KTX_FILE_OVERFLOW;
         }
