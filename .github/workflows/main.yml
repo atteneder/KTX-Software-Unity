@@ -78,7 +78,7 @@ jobs:
         submodules: true
         lfs: true
 
-    - name: configure_linux_64
+    - name: apt_install
       run: |
         sudo apt-get -qq update
         sudo apt-get -qq install libzstd-dev ninja-build
