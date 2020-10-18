@@ -104,6 +104,21 @@ jobs:
     #     name: ktx_unity_linux_32
     #     path: build_linux_32/libktx_unity.so
 
+    # Emscripten
+    - uses: lovasoa/setup-emscripten@master
+      with:
+        emscripten-version: '1.38.48-fastcomp'
+    - name: configure_wasm
+      run: emcmake cmake -Bbuild_web -DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1
+    - name: build_wasm
+      run: cmake --build build_web --target ktx_unity
+    - uses: actions/upload-artifact@master
+      with:
+        name: ktx_unity_web
+        path: |
+          build_web/libktx_unity.bc
+          build_web/KTX-Software/libktx_read.bc
+
     # - name: install_android_ndk
     #   run: if [ ! -f android-ndk-r21d-linux-x86_64.zip ]; then echo "Installing Android NDK"; wget https://dl.google.com/android/repository/android-ndk-r21d-linux-x86_64.zip; unzip android-ndk-r21d-linux-x86_64.zip; echo "Installed Android NDK"; else echo "Android NDK already installed"; fi
 
