@@ -105,9 +105,10 @@ jobs:
     #     path: build_linux_32/libktx_unity.so
 
     # Emscripten
-    - uses: lovasoa/setup-emscripten@master
+    - uses: mymindstorm/setup-emsdk@v7
       with:
-        emscripten-version: '1.38.48-fastcomp'
+        version: 1.38.48-fastcomp
+        actions-cache-folder: 'emsdk-cache'
     - name: configure_wasm
       run: emcmake cmake -Bbuild_web -DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1
     - name: build_wasm
