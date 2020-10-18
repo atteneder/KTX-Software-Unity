@@ -17,6 +17,7 @@ endif()
 
 add_library(ktx_unity ${UNITY_TYPE}
     src/ktx_c_binding.c
+    $<TARGET_OBJECTS:obj_basisu_cbind>
 )
 
 target_link_libraries(ktx_unity ktx_read)
