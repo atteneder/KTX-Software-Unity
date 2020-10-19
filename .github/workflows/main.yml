@@ -89,7 +89,9 @@ jobs:
     - uses: actions/upload-artifact@master
       with:
         name: ktx_unity_linux_64
-        path: build_linux_64/libktx_unity.so
+        path: |
+          build_linux_64/libktx_unity.so
+          build_linux_64/KTX-Software/libktx_read.so
 
     # - name: install_i386_env
     #   run: |
