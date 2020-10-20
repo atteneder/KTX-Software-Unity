@@ -93,20 +93,20 @@ jobs:
           build_linux_64/libktx_unity.so
           build_linux_64/KTX-Software/libktx_read.so
 
-    - name: install_i386_env
-      run: |
-        sudo apt-get update
-        sudo apt install build-essential gcc-multilib g++-multilib libzstd-dev:i386
-    - name: configure_linux_32
-      run: cmake . -G Ninja -Bbuild_linux_32 -DCMAKE_TOOLCHAIN_FILE=cmake/linux_i686.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
-    - name: build_linux_32
-      run: cmake --build build_linux_32 --target ktx_unity
-    - uses: actions/upload-artifact@master
-      with:
-        name: ktx_unity_linux_32
-        path: |
-          build_linux_32/libktx_unity.so
-          build_linux_32/KTX-Software/libktx_read.so
+    # - name: install_i386_env
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt install build-essential gcc-multilib g++-multilib libzstd-dev:i386
+    # - name: configure_linux_32
+    #   run: cmake . -G Ninja -Bbuild_linux_32 -DCMAKE_TOOLCHAIN_FILE=cmake/linux_i686.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+    # - name: build_linux_32
+    #   run: cmake --build build_linux_32 --target ktx_unity
+    # - uses: actions/upload-artifact@master
+    #   with:
+    #     name: ktx_unity_linux_32
+    #     path: |
+    #       build_linux_32/libktx_unity.so
+    #       build_linux_32/KTX-Software/libktx_read.so
 
     # Emscripten
     - uses: mymindstorm/setup-emsdk@v7
