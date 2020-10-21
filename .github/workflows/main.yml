@@ -15,12 +15,12 @@ jobs:
     - name: configure_mac
       run: cmake . -Bbuild_mac
     - name: build_mac
-      run: cmake --build build_mac --config MinSizeRel --target ktx_unity
+      run: cmake --build build_mac --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO
 
     - name: configure_ios
       run: cmake -Bbuild_ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS
     - name: build_ios
-      run: cmake --build build_ios --config MinSizeRel --target ktx_unity
+      run: cmake --build build_ios --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO
 
     - name: package_apple
       run: |
