@@ -13,14 +13,14 @@ jobs:
         lfs: true
 
     - name: configure_mac
-      run: cmake . -Bbuild_mac -DCMAKE_BUILD_TYPE=Release
+      run: cmake . -Bbuild_mac
     - name: build_mac
-      run: cmake --build build_mac --target ktx_unity
+      run: cmake --build build_mac --config MinSizeRel --target ktx_unity
 
     - name: configure_ios
       run: cmake -Bbuild_ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS
     - name: build_ios
-      run: cmake --build build_ios --config Release --target ktx_unity
+      run: cmake --build build_ios --config MinSizeRel --target ktx_unity
 
     - name: package_apple
       run: |
@@ -28,8 +28,8 @@ jobs:
         mkdir ktx_unity_apple/x86_64
         mv build_mac/ktx_unity.bundle ktx_unity_apple/x86_64
         mkdir ktx_unity_apple/iOS
-        mv build_ios/Release-iphoneos/libktx_unity.a ktx_unity_apple/iOS
-        mv build_ios/KTX-Software/Release-iphoneos/libktx_read.a ktx_unity_apple/iOS
+        mv build_ios/MinSizeRel-iphoneos/libktx_unity.a ktx_unity_apple/iOS
+        mv build_ios/KTX-Software/MinSizeRel-iphoneos/libktx_read.a ktx_unity_apple/iOS
     - uses: actions/upload-artifact@master
       with:
         name: ktx_unity_apple
@@ -46,14 +46,14 @@ jobs:
     - name: configure_win_64
       run: cmake . -G "Visual Studio 16 2019" -A x64 -Bbuild_win_64
     - name: build_win_64
-      run: cmake --build build_win_64 --config Release --target ktx_unity
+      run: cmake --build build_win_64 --config MinSizeRel --target ktx_unity
     # Tests don't work / are not built yet
     # - name: test_win
     #   run: cmake --build build_win_64 --target test
     - name: package_win
       run: |
         mkdir ktx_unity_win/x86_64
-        mv build_win_64\Release\ktx_unity.dll ktx_unity_win/x86_64
+        mv build_win_64\MinSizeRel\ktx_unity.dll ktx_unity_win/x86_64
     - uses: actions/upload-artifact@master
       with:
         name: ktx_unity_win
@@ -64,11 +64,11 @@ jobs:
     # - name: configure_win_32
     #   run: cmake . -G "Visual Studio 16 2019" -A Win32 -Bbuild_win_32
     # - name: build_win_32
-    #   run: cmake --build build_win_32 --config Release --target ktx_unity
+    #   run: cmake --build build_win_32 --config MinSizeRel --target ktx_unity
     # - uses: actions/upload-artifact@master
     #   with:
     #     name: ktx_unity_win_32
-    #     path: build_win_32\Release\ktx_unity.dll
+    #     path: build_win_32\MinSizeRel\ktx_unity.dll
 
   linux:
     runs-on: ubuntu-20.04
@@ -83,7 +83,7 @@ jobs:
         sudo apt-get -qq update
         sudo apt-get -qq install libzstd-dev ninja-build
     - name: configure_linux_64
-      run: cmake . -G Ninja -Bbuild_linux_64 -DCMAKE_BUILD_TYPE=Release
+      run: cmake . -G Ninja -Bbuild_linux_64 -DCMAKE_BUILD_TYPE=MinSizeRel
     - name: build_linux_64
       run: cmake --build build_linux_64 --target ktx_unity
 
@@ -92,7 +92,7 @@ jobs:
     #     sudo apt-get update
     #     sudo apt install build-essential gcc-multilib g++-multilib libzstd-dev:i386
     # - name: configure_linux_32
-    #   run: cmake . -G Ninja -Bbuild_linux_32 -DCMAKE_TOOLCHAIN_FILE=cmake/linux_i686.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+    #   run: cmake . -G Ninja -Bbuild_linux_32 -DCMAKE_TOOLCHAIN_FILE=cmake/linux_i686.toolchain.cmake -DCMAKE_BUILD_TYPE=MinSizeRel
     # - name: build_linux_32
     #   run: cmake --build build_linux_32 --target ktx_unity
 
@@ -112,12 +112,12 @@ jobs:
       run: if [ ! -f android-ndk-r21d-linux-x86_64.zip ]; then echo "Installing Android NDK"; wget https://dl.google.com/android/repository/android-ndk-r21d-linux-x86_64.zip; unzip android-ndk-r21d-linux-x86_64.zip; echo "Installed Android NDK"; else echo "Android NDK already installed"; fi
 
     - name: configure_android_arm64-v8a
-      run: cmake -Bbuild_android_arm64-v8a -DANDROID_ABI=arm64-v8a -DCMAKE_BUILD_TYPE=Release -DANDROID_NDK=android-ndk-r21d -DCMAKE_TOOLCHAIN_FILE="android-ndk-r21d/build/cmake/android.toolchain.cmake"
+      run: cmake -Bbuild_android_arm64-v8a -DANDROID_ABI=arm64-v8a -DCMAKE_BUILD_TYPE=MinSizeRel -DANDROID_NDK=android-ndk-r21d -DCMAKE_TOOLCHAIN_FILE="android-ndk-r21d/build/cmake/android.toolchain.cmake"
     - name: build_android_arm64-v8a
       run: cmake --build build_android_arm64-v8a --target ktx_unity
 
     - name: configure_android_armeabi-v7a
-      run: cmake -Bbuild_android_armeabi-v7a -DANDROID_ABI=armeabi-v7a -DCMAKE_BUILD_TYPE=Release -DANDROID_NDK=android-ndk-r21d -DCMAKE_TOOLCHAIN_FILE="android-ndk-r21d/build/cmake/android.toolchain.cmake"
+      run: cmake -Bbuild_android_armeabi-v7a -DANDROID_ABI=armeabi-v7a -DCMAKE_BUILD_TYPE=MinSizeRel -DANDROID_NDK=android-ndk-r21d -DCMAKE_TOOLCHAIN_FILE="android-ndk-r21d/build/cmake/android.toolchain.cmake"
     - name: build_android_armeabi-v7a
       run: cmake --build build_android_armeabi-v7a --target ktx_unity
 
