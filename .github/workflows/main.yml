@@ -16,28 +16,24 @@ jobs:
       run: cmake . -Bbuild_mac -DCMAKE_BUILD_TYPE=Release
     - name: build_mac
       run: cmake --build build_mac --target ktx_unity
-    - name: package_mac
-      run: |
-        mkdir build_mac/ktx_unity_mac
-        mv build_mac/ktx_unity.bundle build_mac/ktx_unity_mac
-    - uses: actions/upload-artifact@master
-      with:
-        name: ktx_unity_mac
-        path: build_mac/ktx_unity_mac
 
     - name: configure_ios
       run: cmake -Bbuild_ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS
     - name: build_ios
       run: cmake --build build_ios --config Release --target ktx_unity
-    - name: package_ios
+
+    - name: package_apple
       run: |
-        mkdir build_ios/ktx_unity_ios
-        cp build_ios/Release-iphoneos/libktx_unity.a build_ios/ktx_unity_ios
-        cp build_ios/KTX-Software/Release-iphoneos/libktx_read.a build_ios/ktx_unity_ios
+        mkdir ktx_unity_apple
+        mkdir ktx_unity_apple/x86_64
+        mv build_mac/ktx_unity.bundle ktx_unity_apple/x86_64
+        mkdir ktx_unity_apple/iOS
+        cp build_ios/Release-iphoneos/libktx_unity.a ktx_unity_apple/iOS
+        cp build_ios/KTX-Software/Release-iphoneos/libktx_read.a ktx_unity_apple/iOS
     - uses: actions/upload-artifact@master
       with:
-        name: ktx_unity_ios
-        path: build_ios/ktx_unity_ios
+        name: ktx_unity_apple
+        path: ktx_unity_apple
 
   windows:
     runs-on: windows-latest
@@ -54,10 +50,15 @@ jobs:
     # Tests don't work / are not built yet
     # - name: test_win
     #   run: cmake --build build_win_64 --target test
+    - name: package_win
+      run: |
+        mkdir ktx_unity_win/x86_64
+        mv build_win_64\Release\ktx_unity.dll ktx_unity_win/x86_64
+        mv build_win_64\KTX-Software\Release\ktx_read.dll ktx_unity_win/x86_64
     - uses: actions/upload-artifact@master
       with:
-        name: ktx_unity_win_64
-        path: build_win_64\Release\ktx_unity.dll
+        name: ktx_unity_win
+        path: ktx_unity_win
 
 
     ## No 32 bit support, since KTX-Software does not provide it
@@ -86,12 +87,6 @@ jobs:
       run: cmake . -G Ninja -Bbuild_linux_64 -DCMAKE_BUILD_TYPE=Release
     - name: build_linux_64
       run: cmake --build build_linux_64 --target ktx_unity
-    - uses: actions/upload-artifact@master
-      with:
-        name: ktx_unity_linux_64
-        path: |
-          build_linux_64/libktx_unity.so
-          build_linux_64/KTX-Software/libktx_read.so
 
     # - name: install_i386_env
     #   run: |
@@ -101,12 +96,6 @@ jobs:
     #   run: cmake . -G Ninja -Bbuild_linux_32 -DCMAKE_TOOLCHAIN_FILE=cmake/linux_i686.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
     # - name: build_linux_32
     #   run: cmake --build build_linux_32 --target ktx_unity
-    # - uses: actions/upload-artifact@master
-    #   with:
-    #     name: ktx_unity_linux_32
-    #     path: |
-    #       build_linux_32/libktx_unity.so
-    #       build_linux_32/KTX-Software/libktx_read.so
 
     # Emscripten
     - uses: mymindstorm/setup-emsdk@v7
@@ -117,13 +106,9 @@ jobs:
       run: emcmake cmake -Bbuild_web -DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1
     - name: build_wasm
       run: cmake --build build_web --target ktx_unity
-    - uses: actions/upload-artifact@master
-      with:
-        name: ktx_unity_web
-        path: |
-          build_web/libktx_unity.bc
-          build_web/KTX-Software/libktx_read.bc
 
+
+    # Android
     - name: install_android_ndk
       run: if [ ! -f android-ndk-r21d-linux-x86_64.zip ]; then echo "Installing Android NDK"; wget https://dl.google.com/android/repository/android-ndk-r21d-linux-x86_64.zip; unzip android-ndk-r21d-linux-x86_64.zip; echo "Installed Android NDK"; else echo "Android NDK already installed"; fi
 
@@ -131,20 +116,34 @@ jobs:
       run: cmake -Bbuild_android_arm64-v8a -DANDROID_ABI=arm64-v8a -DCMAKE_BUILD_TYPE=Release -DANDROID_NDK=android-ndk-r21d -DCMAKE_TOOLCHAIN_FILE="android-ndk-r21d/build/cmake/android.toolchain.cmake"
     - name: build_android_arm64-v8a
       run: cmake --build build_android_arm64-v8a --target ktx_unity
-    - uses: actions/upload-artifact@master
-      with:
-        name: ktx_unity_android_arm64-v8a
-        path: |
-          build_android_arm64-v8a/libktx_unity.so
-          build_android_arm64-v8a/KTX-Software/libktx_read.so
 
     - name: configure_android_armeabi-v7a
       run: cmake -Bbuild_android_armeabi-v7a -DANDROID_ABI=armeabi-v7a -DCMAKE_BUILD_TYPE=Release -DANDROID_NDK=android-ndk-r21d -DCMAKE_TOOLCHAIN_FILE="android-ndk-r21d/build/cmake/android.toolchain.cmake"
     - name: build_android_armeabi-v7a
       run: cmake --build build_android_armeabi-v7a --target ktx_unity
+
+    # Linux, WebGL and Android artifact 
+    - name: package_web_android_linux
+      run: |
+        mkdir ktx_unity_web_android_linux
+        mkdir ktx_unity_web_android_linux/x86_64
+        mv build_linux_64/libktx_unity.so ktx_unity_web_android_linux/x86_64
+        mv build_linux_64/KTX-Software/libktx_read.so ktx_unity_web_android_linux/x86_64
+        mkdir ktx_unity_web_android_linux/WebGL
+        mv build_web/libktx_unity.bc ktx_unity_web_android_linux/WebGL
+        mv build_web/KTX-Software/libktx_read.bc ktx_unity_web_android_linux/WebGL
+        mkdir ktx_unity_web_android_linux/Android
+        mkdir ktx_unity_web_android_linux/Android/libs
+        mkdir ktx_unity_web_android_linux/Android/libs/arm64-v8a
+        mkdir ktx_unity_web_android_linux/Android/libs/armeabi-v7a
+        mv build_android_arm64-v8a/libktx_unity.so ktx_unity_web_android_linux/Android/libs/arm64-v8a
+        mv build_android_arm64-v8a/KTX-Software/libktx_read.so ktx_unity_web_android_linux/Android/libs/arm64-v8a
+        mv build_android_armeabi-v7a/libktx_unity.so ktx_unity_web_android_linux/Android/libs/armeabi-v7a
+        mv build_android_armeabi-v7a/KTX-Software/libktx_read.so ktx_unity_web_android_linux/Android/libs/armeabi-v7a
+        # mkdir ktx_unity_web_android_linux/x86
+        # mv build_linux_32/libktx_unity.so ktx_unity_web_android_linux/x86
+        # mv build_linux_32/KTX-Software/libktx_read.so ktx_unity_web_android_linux/x86
     - uses: actions/upload-artifact@master
       with:
-        name: ktx_unity_android_armeabi-v7a
-        path: |
-          build_android_armeabi-v7a/libktx_unity.so
-          build_android_armeabi-v7a/KTX-Software/libktx_read.so
+        name: ktx_unity_web_android_linux
+        path: ktx_unity_web_android_linux
