@@ -129,6 +129,7 @@ jobs:
         mv build_linux_64/libktx_unity.so ktx_unity_web_android_linux/x86_64
         mkdir ktx_unity_web_android_linux/WebGL
         mv build_web/libktx_unity.bc ktx_unity_web_android_linux/WebGL
+        mv build_web/KTX-Software/libktx_read.bc ktx_unity_web_android_linux/WebGL
         mkdir ktx_unity_web_android_linux/Android
         mkdir ktx_unity_web_android_linux/Android/libs
         mkdir ktx_unity_web_android_linux/Android/libs/arm64-v8a
@@ -141,3 +142,32 @@ jobs:
       with:
         name: ktx_unity_web_android_linux
         path: ktx_unity_web_android_linux
+
+  combine:
+    name: combine artifacts
+    runs-on: ubuntu-latest
+    needs: [mac, windows, linux]
+    steps:
+      - name: download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: artifacts
+      - name: combine
+        run: |
+          mkdir ktx_unity
+          cp -r artifacts/ktx_unity_apple/* ktx_unity
+          cp -r artifacts/ktx_unity_win/* ktx_unity
+          cp -r artifacts/ktx_unity_web_android_linux/* ktx_unity
+      - uses: actions/upload-artifact@master
+        with:
+          name: ktx_unity
+          path: ktx_unity
+      - uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            ktx_unity_apple
+            ktx_unity_win
+            ktx_unity_web_android_linux
