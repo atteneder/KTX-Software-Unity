@@ -105,7 +105,9 @@ DLL_EXPORT ktx_uint32_t ktx_get_orientation ( ktxTexture* ktx ) {
 }
 
 DLL_EXPORT bool ktx_get_has_alpha( ktxTexture2* ktx ) {
-    return ktxTexture2_GetNumComponents(ktx) == 4;
+    // TODO: This will change
+    // See discussion https://github.com/KhronosGroup/KTX-Software/issues/327
+    return ktxTexture2_GetNumComponents(ktx) > 1;
 }
 
 DLL_EXPORT uint32_t ktx_get_num_components( ktxTexture2* ktx ) {
