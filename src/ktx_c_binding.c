@@ -90,16 +90,18 @@ DLL_EXPORT ktxSupercmpScheme ktx_get_supercompressionScheme ( ktxTexture* ktx ) 
     }
     return ((ktxTexture2 *)ktx)->supercompressionScheme;
 }
-DLL_EXPORT void ktx_get_orientation (
-    ktxTexture* ktx,
-    ktxOrientationX* x,
-    ktxOrientationY* y,
-    ktxOrientationZ* z
-    )
-{
-    *x = ktx->orientation.x;
-    *y = ktx->orientation.y;
-    *z = ktx->orientation.z;
+DLL_EXPORT ktx_uint32_t ktx_get_orientation ( ktxTexture* ktx ) {
+    ktx_uint32_t orientation = 0;
+    if(ktx->orientation.x == KTX_ORIENT_X_LEFT) {
+        orientation |= 0x1;
+    }
+    if(ktx->orientation.y == KTX_ORIENT_Y_UP) {
+        orientation |= 0x2;
+    }
+    if(ktx->orientation.z == KTX_ORIENT_Z_IN) {
+        orientation |= 0x4;
+    }
+    return orientation;
 }
 
 DLL_EXPORT bool ktx_get_has_alpha( ktxTexture2* ktx ) {
