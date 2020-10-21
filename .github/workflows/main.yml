@@ -28,8 +28,8 @@ jobs:
         mkdir ktx_unity_apple/x86_64
         mv build_mac/ktx_unity.bundle ktx_unity_apple/x86_64
         mkdir ktx_unity_apple/iOS
-        cp build_ios/Release-iphoneos/libktx_unity.a ktx_unity_apple/iOS
-        cp build_ios/KTX-Software/Release-iphoneos/libktx_read.a ktx_unity_apple/iOS
+        mv build_ios/Release-iphoneos/libktx_unity.a ktx_unity_apple/iOS
+        mv build_ios/KTX-Software/Release-iphoneos/libktx_read.a ktx_unity_apple/iOS
     - uses: actions/upload-artifact@master
       with:
         name: ktx_unity_apple
@@ -54,7 +54,6 @@ jobs:
       run: |
         mkdir ktx_unity_win/x86_64
         mv build_win_64\Release\ktx_unity.dll ktx_unity_win/x86_64
-        mv build_win_64\KTX-Software\Release\ktx_read.dll ktx_unity_win/x86_64
     - uses: actions/upload-artifact@master
       with:
         name: ktx_unity_win
@@ -128,21 +127,16 @@ jobs:
         mkdir ktx_unity_web_android_linux
         mkdir ktx_unity_web_android_linux/x86_64
         mv build_linux_64/libktx_unity.so ktx_unity_web_android_linux/x86_64
-        mv build_linux_64/KTX-Software/libktx_read.so ktx_unity_web_android_linux/x86_64
         mkdir ktx_unity_web_android_linux/WebGL
         mv build_web/libktx_unity.bc ktx_unity_web_android_linux/WebGL
-        mv build_web/KTX-Software/libktx_read.bc ktx_unity_web_android_linux/WebGL
         mkdir ktx_unity_web_android_linux/Android
         mkdir ktx_unity_web_android_linux/Android/libs
         mkdir ktx_unity_web_android_linux/Android/libs/arm64-v8a
         mkdir ktx_unity_web_android_linux/Android/libs/armeabi-v7a
         mv build_android_arm64-v8a/libktx_unity.so ktx_unity_web_android_linux/Android/libs/arm64-v8a
-        mv build_android_arm64-v8a/KTX-Software/libktx_read.so ktx_unity_web_android_linux/Android/libs/arm64-v8a
         mv build_android_armeabi-v7a/libktx_unity.so ktx_unity_web_android_linux/Android/libs/armeabi-v7a
-        mv build_android_armeabi-v7a/KTX-Software/libktx_read.so ktx_unity_web_android_linux/Android/libs/armeabi-v7a
         # mkdir ktx_unity_web_android_linux/x86
         # mv build_linux_32/libktx_unity.so ktx_unity_web_android_linux/x86
-        # mv build_linux_32/KTX-Software/libktx_read.so ktx_unity_web_android_linux/x86
     - uses: actions/upload-artifact@master
       with:
         name: ktx_unity_web_android_linux
