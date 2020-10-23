@@ -30,7 +30,7 @@ jobs:
         mkdir ktx_unity_apple/iOS
         mv build_ios/MinSizeRel-iphoneos/libktx_unity.a ktx_unity_apple/iOS
         mv build_ios/KTX-Software/MinSizeRel-iphoneos/libktx_read.a ktx_unity_apple/iOS
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v2
       with:
         name: ktx_unity_apple
         path: ktx_unity_apple
@@ -54,7 +54,7 @@ jobs:
       run: |
         mkdir ktx_unity_win/x86_64
         mv build_win_64\MinSizeRel\ktx_unity.dll ktx_unity_win/x86_64
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v2
       with:
         name: ktx_unity_win
         path: ktx_unity_win
@@ -65,7 +65,7 @@ jobs:
     #   run: cmake . -G "Visual Studio 16 2019" -A Win32 -Bbuild_win_32
     # - name: build_win_32
     #   run: cmake --build build_win_32 --config MinSizeRel --target ktx_unity
-    # - uses: actions/upload-artifact@master
+    # - uses: actions/upload-artifact@v2
     #   with:
     #     name: ktx_unity_win_32
     #     path: build_win_32\MinSizeRel\ktx_unity.dll
@@ -138,7 +138,7 @@ jobs:
         mv build_android_armeabi-v7a/libktx_unity.so ktx_unity_web_android_linux/Android/libs/armeabi-v7a
         # mkdir ktx_unity_web_android_linux/x86
         # mv build_linux_32/libktx_unity.so ktx_unity_web_android_linux/x86
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v2
       with:
         name: ktx_unity_web_android_linux
         path: ktx_unity_web_android_linux
@@ -161,7 +161,7 @@ jobs:
           cp -r artifacts/ktx_unity_apple/* ktx_unity
           cp -r artifacts/ktx_unity_win/* ktx_unity
           cp -r artifacts/ktx_unity_web_android_linux/* ktx_unity
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         with:
           name: ktx_unity
           path: ktx_unity
