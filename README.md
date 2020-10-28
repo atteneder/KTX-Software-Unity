@@ -6,6 +6,7 @@ This projects provides a C wrapper for [KTX-Software](https://github.com/Khronos
 
 - macOS x86_64 (Intel)
 - Windows 64-bit
+- Universal Windows Platform (x64)
 - Linux x86_64
 - iOS (arm64 and armv7a)
 - Android (arm64-v8a and armeabi-v7a)

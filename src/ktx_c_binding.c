@@ -39,11 +39,6 @@ DLL_EXPORT ktxTexture* ktx_load_ktx( const uint8_t * data, size_t length, KTX_er
         &newTex
         );
 
-    if(newTex->classId != ktxTexture2_c) {
-        *out_status = KTX_UNSUPPORTED_FEATURE;
-        return NULL;
-    }
-
     *out_status = result;
     return newTex;
 }
@@ -102,30 +97,6 @@ DLL_EXPORT ktx_uint32_t ktx_get_orientation ( ktxTexture* ktx ) {
         orientation |= 0x4;
     }
     return orientation;
-}
-
-DLL_EXPORT bool ktx_get_has_alpha( ktxTexture2* ktx ) {
-    // TODO: This will change
-    // See discussion https://github.com/KhronosGroup/KTX-Software/issues/327
-    return ktxTexture2_GetNumComponents(ktx) > 1;
-}
-
-DLL_EXPORT uint32_t ktx_get_num_components( ktxTexture2* ktx ) {
-    return ktxTexture2_GetNumComponents(ktx);
-}
-
-DLL_EXPORT KTX_error_code ktx_transcode_ktx(
-    ktxTexture2* ktx,
-    ktx_transcode_fmt_e outputFormat,
-    ktx_transcode_flags transcodeFlags
-    )
-{
-    KTX_error_code result = ktxTexture2_TranscodeBasis(
-       ktx,
-       outputFormat,
-       transcodeFlags
-       );
-    return result;
 }
 
 DLL_EXPORT void ktx_get_data(
