@@ -1,6 +1,16 @@
 name: build_and_test_ktx_unity
 
-on: [push]
+on:
+  # Trigger the workflow on pull request,
+  # but only for the main branch
+  pull_request:
+    branches:
+      - main
+  # Also trigger on release created events
+  release:
+    types:
+      - created
+  workflow_dispatch:
 
 jobs:
   mac:
