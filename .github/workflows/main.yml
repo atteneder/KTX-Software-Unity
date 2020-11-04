@@ -1,4 +1,4 @@
-name: build_and_test_ktx_unity
+name: build
 
 on:
   # Trigger the workflow on pull request,
