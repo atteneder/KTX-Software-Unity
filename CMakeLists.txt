@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(
     KTX-Software-Unity
-    VERSION 1.0.0
+    VERSION 0.2.2
     DESCRIPTION "Unity wrapper for KTX-Software"
 )
 
@@ -24,4 +24,11 @@ target_link_libraries(ktx_unity ktx_read)
 
 if(APPLE)
     set_target_properties(ktx_unity PROPERTIES BUNDLE true)
+elseif(WIN32)
+    target_sources(
+        ktx_unity
+    PRIVATE
+        # Explicitely export some ktx_read functions
+        src/ktx_unity_export.def
+    )
 endif()
