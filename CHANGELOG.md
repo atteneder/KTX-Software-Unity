@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2020-11-04
+### Changed
+- Update to KTX-Software custom branch with Android support and basisu_c_binding fixes.
+### Fixed
+- Loading basis files now works on Windows x64
+
 ## [0.2.0] - 2020-10-28
 ### Changed
 - Updated KTX-Software to 4.0.0 beta 5
