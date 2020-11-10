@@ -24,7 +24,9 @@
 
 #include <ktx.h>
 
-// extern "C" {
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 DLL_EXPORT ktxTexture* ktx_load_ktx( const uint8_t * data, size_t length, KTX_error_code* out_status ) {
     
@@ -155,4 +157,7 @@ DLL_EXPORT KTX_error_code ktx_copy_data_levels_reverted(
 DLL_EXPORT void ktx_unload_ktx( ktxTexture* ktx ) {
     ktxTexture_Destroy(ktx);
 }
-// }
+
+#ifdef __cplusplus
+}
+#endif
