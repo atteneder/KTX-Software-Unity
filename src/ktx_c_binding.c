@@ -101,6 +101,10 @@ DLL_EXPORT ktx_uint32_t ktx_get_orientation ( ktxTexture* ktx ) {
     return orientation;
 }
 
+ktx_uint32_t ktx_transcode (ktxTexture2* ktx, ktx_transcode_fmt_e fmt, ktx_transcode_flags transcodeFlags) {
+    return ktxTexture2_TranscodeBasis(ktx, fmt, transcodeFlags);
+}
+
 DLL_EXPORT void ktx_get_data(
     ktxTexture* ktx,
     const uint8_t ** data,
