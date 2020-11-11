@@ -171,15 +171,17 @@ jobs:
           cp -r artifacts/ktx_unity_apple/* ktx_unity
           cp -r artifacts/ktx_unity_win/* ktx_unity
           cp -r artifacts/ktx_unity_web_android_linux/* ktx_unity
-      - uses: actions/upload-artifact@v2
-        with:
-          name: ktx_unity
-          path: ktx_unity
+      - name: zip
+        run: zip -r ktx_unity.zip ktx_unity
       - uses: AButler/upload-release-assets@v2.0
         if: github.event_name == 'release' && github.event.action == 'created'
         with:
-          files: ktx_unity
+          files: ktx_unity.zip
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ktx_unity.zip
+          path: ktx_unity.zip
       - uses: geekyeggo/delete-artifact@v1
         with:
           name: |
