@@ -175,6 +175,11 @@ jobs:
         with:
           name: ktx_unity
           path: ktx_unity
+      - uses: AButler/upload-release-assets@v2.0
+        if: github.event_name == 'release' && github.event.action == 'created'
+        with:
+          files: ktx_unity
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: geekyeggo/delete-artifact@v1
         with:
           name: |
