@@ -60,15 +60,29 @@ jobs:
     # Tests don't work / are not built yet
     # - name: test_win
     #   run: cmake --build build_win_64 --target test
+
+    - name: configure_win_arm_64
+      run: cmake . -G "Visual Studio 16 2019" -A ARM64 -Bbuild_win_arm_64
+    - name: build_win_arm_64
+      run: cmake --build build_win_arm_64 --config MinSizeRel --target ktx_unity
+
+    - name: configure_win_arm
+      run: cmake . -G "Visual Studio 16 2019" -A ARM -Bbuild_win_arm
+    - name: build_win_arm
+      run: cmake --build build_win_arm --config MinSizeRel --target ktx_unity
+
     - name: package_win
       run: |
         mkdir ktx_unity_win/x86_64
+        mkdir ktx_unity_win/WSA/ARM
+        mkdir ktx_unity_win/WSA/ARM64
         mv build_win_64\MinSizeRel\ktx_unity.dll ktx_unity_win/x86_64
+        mv build_win_arm\MinSizeRel\ktx_unity.dll ktx_unity_win/WSA/ARM
+        mv build_win_arm_64\MinSizeRel\ktx_unity.dll ktx_unity_win/WSA/ARM64
     - uses: actions/upload-artifact@v2
       with:
         name: ktx_unity_win
         path: ktx_unity_win
-
 
     ## No 32 bit support, since KTX-Software does not provide it
     # - name: configure_win_32
