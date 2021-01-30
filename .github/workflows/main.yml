@@ -62,12 +62,12 @@ jobs:
     #   run: cmake --build build_win_64 --target test
 
     - name: configure_win_arm_64
-      run: cmake . -G "Visual Studio 16 2019" -A ARM64 -Bbuild_win_arm_64
+      run: cmake . -G "Visual Studio 16 2019" -A ARM64 -Bbuild_win_arm_64 -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
     - name: build_win_arm_64
       run: cmake --build build_win_arm_64 --config MinSizeRel --target ktx_unity
 
     - name: configure_win_arm
-      run: cmake . -G "Visual Studio 16 2019" -A ARM -Bbuild_win_arm
+      run: cmake . -G "Visual Studio 16 2019" -A ARM -Bbuild_win_arm -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
     - name: build_win_arm
       run: cmake --build build_win_arm --config MinSizeRel --target ktx_unity
 
