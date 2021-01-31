@@ -6,7 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0] - 2021-01-31
 ### Added
-- Support for Apple Silicon on macOS via a universal library
 - Universal Windows Platform architectures
   - ARM
   - ARM64 (Microsoft Hololens2)

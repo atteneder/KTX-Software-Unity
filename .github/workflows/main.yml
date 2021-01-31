@@ -23,7 +23,8 @@ jobs:
         lfs: true
 
     - name: configure_mac
-      run: cmake . -Bbuild_mac -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
+      # TODO: add arm64 once it is working
+      run: cmake . -Bbuild_mac -DCMAKE_OSX_ARCHITECTURES="x86_64"
     - name: build_mac
       run: cmake --build build_mac --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO
 
