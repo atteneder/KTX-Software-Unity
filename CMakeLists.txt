@@ -8,10 +8,6 @@ project(
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(KTX_FEATURE_STATIC_LIBRARY ON)
-if (WIN32 AND ${CMAKE_SYSTEM_NAME} STREQUAL "WindowsStore")
-    # Disable OpenGL upload on Universal Windows Platform
-    set(KTX_FEATURE_GL_UPLOAD OFF)
-endif()
 add_subdirectory(KTX-Software)
 
 set(UNITY_TYPE MODULE)
