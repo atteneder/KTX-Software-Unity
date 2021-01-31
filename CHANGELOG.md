@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] -
 ### Added
 - Support for Apple Silicon on macOS via a universal library
+### Changed
+- Updated to KTX-Software branch based on 4.0.0 beta 6
 
 ## [0.2.4] - 2020-11-11
 ### Added
