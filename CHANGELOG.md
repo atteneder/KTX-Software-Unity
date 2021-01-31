@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] -
 ### Added
 - Support for Apple Silicon on macOS via a universal library
+- Universal Windows Platform architectures
+  - ARM
+  - ARM64 (Microsoft Hololens2)
+  - x86
+  - x64
 ### Changed
 - Updated to KTX-Software branch based on 4.0.0 beta 6
 
