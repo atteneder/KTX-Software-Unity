@@ -6,3 +6,20 @@ EXPORTS
     ktxTexture2_GetNumComponents
     ktxTexture2_NeedsTranscoding
     ktxTexture2_TranscodeBasis
+    ;Preserve BasisU C bindings
+    ktx_basisu_basis_init
+    ktx_basisu_create_basis
+    ktx_basisu_open_basis
+    ktx_basisu_close_basis
+    ktx_basisu_delete_basis
+    ktx_basisu_getHasAlpha
+    ktx_basisu_getNumImages
+    ktx_basisu_getNumLevels
+    ktx_basisu_getImageWidth
+    ktx_basisu_getImageHeight
+    ktx_basisu_get_y_flip
+    ktx_basisu_get_is_etc1s
+    ktx_basisu_get_texture_type
+    ktx_basisu_getImageTranscodedSizeInBytes
+    ktx_basisu_startTranscoding
+    ktx_basisu_transcodeImage
