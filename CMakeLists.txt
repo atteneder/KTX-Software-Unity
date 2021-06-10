@@ -17,10 +17,12 @@ endif()
 
 add_library(ktx_unity ${UNITY_TYPE}
     src/ktx_c_binding.c
-    $<TARGET_OBJECTS:obj_basisu_cbind>
 )
 
-target_link_libraries(ktx_unity ktx_read)
+target_link_libraries(ktx_unity
+    ktx_read
+    obj_basisu_cbind
+)
 
 if(APPLE)
     set_target_properties(ktx_unity PROPERTIES BUNDLE true)
