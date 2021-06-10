@@ -31,4 +31,9 @@ elseif(WIN32)
         # Explicitely export some ktx_read functions
         src/ktx_unity_export.def
     )
+    target_compile_definitions(
+        ktx_unity
+    PRIVATE 
+        "KTX_UNITY_API=__declspec(dllexport)"
+    )
 endif()

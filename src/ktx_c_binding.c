@@ -12,12 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-#if defined(_MSC_VER)
-#define DLL_EXPORT __declspec(dllexport)
+#if defined(_WIN32)
+  #if !defined(KTX_UNITY_API)
+    #define KTX_UNITY_API __declspec(dllimport)
+  #endif
+#elif defined(__ANDROID__)
+  #define KTX_UNITY_API __attribute__((visibility("default")))
 #else
-#define DLL_EXPORT
-#endif // defined(_MSC_VER)
+  #define KTX_UNITY_API
+#endif
+
 
 #include <stdint.h>
 #include <string.h>
@@ -28,7 +32,7 @@
 extern "C" {
 #endif
 
-DLL_EXPORT ktxTexture* ktx_load_ktx( const uint8_t * data, size_t length, KTX_error_code* out_status ) {
+KTX_UNITY_API ktxTexture* ktx_load_ktx( const uint8_t * data, size_t length, KTX_error_code* out_status ) {
     
     KTX_error_code result;
     
@@ -45,49 +49,49 @@ DLL_EXPORT ktxTexture* ktx_load_ktx( const uint8_t * data, size_t length, KTX_er
     return newTex;
 }
 
-DLL_EXPORT class_id ktx_get_classId ( ktxTexture* ktx ) {
+KTX_UNITY_API class_id ktx_get_classId ( ktxTexture* ktx ) {
     return ktx->classId;
 }
-DLL_EXPORT ktx_bool_t ktx_get_isArray ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_bool_t ktx_get_isArray ( ktxTexture* ktx ) {
     return ktx->isArray;
 }
-DLL_EXPORT ktx_bool_t ktx_get_isCubemap ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_bool_t ktx_get_isCubemap ( ktxTexture* ktx ) {
     return ktx->isCubemap;
 }
-DLL_EXPORT ktx_bool_t ktx_get_isCompressed ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_bool_t ktx_get_isCompressed ( ktxTexture* ktx ) {
     return ktx->isCompressed;
 }
-DLL_EXPORT ktx_uint32_t ktx_get_baseWidth ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_uint32_t ktx_get_baseWidth ( ktxTexture* ktx ) {
     return ktx->baseWidth;
 }
-DLL_EXPORT ktx_uint32_t ktx_get_baseHeight ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_uint32_t ktx_get_baseHeight ( ktxTexture* ktx ) {
     return ktx->baseHeight;
 }
-DLL_EXPORT ktx_uint32_t ktx_get_numDimensions ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_uint32_t ktx_get_numDimensions ( ktxTexture* ktx ) {
     return ktx->numDimensions;
 }
-DLL_EXPORT ktx_uint32_t ktx_get_numLevels ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_uint32_t ktx_get_numLevels ( ktxTexture* ktx ) {
     return ktx->numLevels;
 }
-DLL_EXPORT ktx_uint32_t ktx_get_numLayers ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_uint32_t ktx_get_numLayers ( ktxTexture* ktx ) {
     return ktx->numLayers;
 }
-DLL_EXPORT ktx_uint32_t ktx_get_numFaces ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_uint32_t ktx_get_numFaces ( ktxTexture* ktx ) {
     return ktx->numFaces;
 }
-DLL_EXPORT ktx_uint32_t ktx_get_vkFormat ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_uint32_t ktx_get_vkFormat ( ktxTexture* ktx ) {
     if (ktx->classId != ktxTexture2_c) {
         return 0; // VK_FORMAT_UNDEFINED
     }
     return ((ktxTexture2*)ktx)->vkFormat;
 }
-DLL_EXPORT ktxSupercmpScheme ktx_get_supercompressionScheme ( ktxTexture* ktx ) {
+KTX_UNITY_API ktxSupercmpScheme ktx_get_supercompressionScheme ( ktxTexture* ktx ) {
     if (ktx->classId != ktxTexture2_c) {
         return KTX_SS_NONE;
     }
     return ((ktxTexture2 *)ktx)->supercompressionScheme;
 }
-DLL_EXPORT ktx_uint32_t ktx_get_orientation ( ktxTexture* ktx ) {
+KTX_UNITY_API ktx_uint32_t ktx_get_orientation ( ktxTexture* ktx ) {
     ktx_uint32_t orientation = 0;
     if(ktx->orientation.x == KTX_ORIENT_X_LEFT) {
         orientation |= 0x1;
@@ -105,7 +109,7 @@ ktx_uint32_t ktx_transcode (ktxTexture2* ktx, ktx_transcode_fmt_e fmt, ktx_trans
     return ktxTexture2_TranscodeBasis(ktx, fmt, transcodeFlags);
 }
 
-DLL_EXPORT void ktx_get_data(
+KTX_UNITY_API void ktx_get_data(
     ktxTexture* ktx,
     const uint8_t ** data,
     size_t* length
@@ -126,7 +130,7 @@ DLL_EXPORT void ktx_get_data(
  * 
  * @return    KTX_SUCCESS on success, other KTX_* enum values on error.
  */
-DLL_EXPORT KTX_error_code ktx_copy_data_levels_reverted(
+KTX_UNITY_API KTX_error_code ktx_copy_data_levels_reverted(
     ktxTexture* ktx,
     uint8_t * dst,
     size_t dst_length
@@ -158,7 +162,7 @@ DLL_EXPORT KTX_error_code ktx_copy_data_levels_reverted(
     return result;
 }
 
-DLL_EXPORT void ktx_unload_ktx( ktxTexture* ktx ) {
+KTX_UNITY_API void ktx_unload_ktx( ktxTexture* ktx ) {
     ktxTexture_Destroy(ktx);
 }
 
