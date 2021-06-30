@@ -29,7 +29,7 @@ jobs:
       run: cmake --build build_mac --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO
 
     - name: configure_ios
-      run: cmake -Bbuild_ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS
+      run: cmake -B build_ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS -DKTX_EMBED_BITCODE=ON
     - name: build_ios
       run: cmake --build build_ios --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO
 
