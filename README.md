@@ -4,7 +4,7 @@
 
 This projects provides a C wrapper for [KTX-Software](https://github.com/KhronosGroup/KTX-Software) including C wrappers for Basis Universal (.basis format) and a CMake configuration to build native libraries for following platforms:
 
-- macOS (Intel only)
+- macOS Universal (Intel and Apple Silicon)
 - Windows 64-bit
 - Universal Windows Platform (x86,x64,arm and arm64)
 - Linux x86_64
