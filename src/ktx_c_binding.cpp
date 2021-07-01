@@ -28,6 +28,8 @@
 
 #include <ktx.h>
 
+#include <basisu_c_binding.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -164,6 +166,12 @@ KTX_UNITY_API KTX_error_code ktx_copy_data_levels_reverted(
 
 KTX_UNITY_API void ktx_unload_ktx( ktxTexture* ktx ) {
     ktxTexture_Destroy(ktx);
+}
+
+void _basisu_dummy() {
+    // Referencing just one function of KTX-Software's basisu C binding
+    // ensures its symbols are included when linking (e.g. Android)
+    basis_file* x = ktx_basisu_create_basis();
 }
 
 #ifdef __cplusplus

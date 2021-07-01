@@ -16,7 +16,7 @@ if(IOS OR EMSCRIPTEN)
 endif()
 
 add_library(ktx_unity ${UNITY_TYPE}
-    src/ktx_c_binding.c
+    src/ktx_c_binding.cpp
 )
 
 target_link_libraries(ktx_unity

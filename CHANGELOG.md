@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI: Installing Android NDK via GH action
 ### Fixed
 - Added missing library (iOS libobj_basisu_cbind.a) to artifact
+- Certified that KTX-Software BasisU C binding symbols are preserved (for Android)
 
 ## [0.4.0] - 2021-06-30
 ### Added
