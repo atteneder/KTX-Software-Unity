@@ -48,7 +48,7 @@ jobs:
         mkdir ktx_unity_apple/iOS
         mv build_ios/MinSizeRel-iphoneos/libktx_unity.a ktx_unity_apple/iOS
         mv build_ios/KTX-Software/MinSizeRel-iphoneos/libktx_read.a ktx_unity_apple/iOS
-        mv build_ios/KTX-Software/interface/basisu_c_binding/libobj_basisu_cbind.a ktx_unity_apple/iOS
+        mv build_ios/KTX-Software/interface/basisu_c_binding/MinSizeRel-iphoneos/libobj_basisu_cbind.a ktx_unity_apple/iOS
     - uses: actions/upload-artifact@v2
       with:
         name: ktx_unity_apple
