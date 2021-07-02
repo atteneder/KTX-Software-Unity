@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Added missing library (iOS libobj_basisu_cbind.a) to artifact
 - Certified that KTX-Software BasisU C binding symbols are preserved (for Android)
+- Switched to data-model-independent types in C binding to avoid crashes on certain platforms (e.g. iOS-arm64)
 
 ## [0.4.0] - 2021-06-30
 ### Added

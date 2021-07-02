@@ -34,7 +34,7 @@
 extern "C" {
 #endif
 
-KTX_UNITY_API ktxTexture* ktx_load_ktx( const uint8_t * data, size_t length, KTX_error_code* out_status ) {
+KTX_UNITY_API ktxTexture* ktx_load_ktx( const uint8_t * data, uint32_t length, KTX_error_code* out_status ) {
     
     KTX_error_code result;
     
@@ -114,11 +114,11 @@ ktx_uint32_t ktx_transcode (ktxTexture2* ktx, ktx_transcode_fmt_e fmt, ktx_trans
 KTX_UNITY_API void ktx_get_data(
     ktxTexture* ktx,
     const uint8_t ** data,
-    size_t* length
+    uint32_t* length
     )
 {
     *data = ktx->pData;
-    *length = ktx->dataSize;
+    *length = (uint32_t) ktx->dataSize;
 }
 
 /**
@@ -135,7 +135,7 @@ KTX_UNITY_API void ktx_get_data(
 KTX_UNITY_API KTX_error_code ktx_copy_data_levels_reverted(
     ktxTexture* ktx,
     uint8_t * dst,
-    size_t dst_length
+    uint32_t dst_length
     )
 {
     size_t dst_offset = 0;
