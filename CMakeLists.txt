@@ -26,6 +26,9 @@ target_link_libraries(ktx_unity
 
 if(APPLE)
     set_target_properties(ktx_unity PROPERTIES BUNDLE true)
+    if(KTX_EMBED_BITCODE)
+        target_compile_options(ktx_unity PRIVATE "-fembed-bitcode")
+    endif()
 elseif(WIN32)
     target_sources(
         ktx_unity
