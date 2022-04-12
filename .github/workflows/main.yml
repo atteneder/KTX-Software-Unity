@@ -22,7 +22,7 @@ env:
 
 jobs:
   mac:
-    runs-on: macOS-latest
+    runs-on: macos-11
 
     steps:
     - uses: actions/checkout@v2
@@ -55,7 +55,7 @@ jobs:
         path: ktx_unity_apple
 
   windows:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
       with:
@@ -248,7 +248,7 @@ jobs:
 
   combine:
     name: combine artifacts
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [mac, windows, linux, linux_legacy]
     steps:
       - name: download artifacts

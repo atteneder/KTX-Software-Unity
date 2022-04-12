@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 
 ### Fixed
 - macOS binary type is `MinSizeRel` now (was default, which is `Debug` inadvertently)
+- (CI) Fixed OS versions to avoid upgrading errors
 
 ## [0.4.2] - 2021-07-16
 ### Fixed
