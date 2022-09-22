@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `ktx_get_image_offset` (wraps `ktxTexture_GetImageOffset`)
 - `ktx_get_image_size` (wraps `ktxTexture_GetImageSize`)
+- `ktx_get_baseDepth`
 ### Changed
 - KTX-Software was updated to recent dev version (post 4.1.0-rc3)
 - Added parameters `startLevel`,`layer` and `faceSlice` to `ktx_copy_data_levels_reverted`, so you can select a specific layer/face/slice and its level(s) to copy.

@@ -69,6 +69,9 @@ KTX_UNITY_API ktx_uint32_t ktx_get_baseWidth ( ktxTexture* ktx ) {
 KTX_UNITY_API ktx_uint32_t ktx_get_baseHeight ( ktxTexture* ktx ) {
     return ktx->baseHeight;
 }
+KTX_UNITY_API ktx_uint32_t ktx_get_baseDepth ( ktxTexture* ktx ) {
+    return ktx->baseDepth;
+}
 KTX_UNITY_API ktx_uint32_t ktx_get_numDimensions ( ktxTexture* ktx ) {
     return ktx->numDimensions;
 }
