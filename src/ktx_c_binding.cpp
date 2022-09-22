@@ -111,6 +111,23 @@ ktx_uint32_t ktx_transcode (ktxTexture2* ktx, ktx_transcode_fmt_e fmt, ktx_trans
     return ktxTexture2_TranscodeBasis(ktx, fmt, transcodeFlags);
 }
 
+KTX_API KTX_error_code KTX_APIENTRY
+ktx_get_image_offset(
+    ktxTexture* ktx,
+    ktx_uint32_t level,
+    ktx_uint32_t layer,
+    ktx_uint32_t faceSlice,
+    ktx_size_t* pOffset
+    )
+{
+    return ktxTexture_GetImageOffset(ktx,level,layer,faceSlice,pOffset);
+}
+
+KTX_API ktx_size_t KTX_APIENTRY
+ktx_get_image_size(ktxTexture* ktx,ktx_uint32_t level) {
+    return ktxTexture_GetImageSize(ktx,level);
+}
+
 KTX_UNITY_API void ktx_get_data(
     ktxTexture* ktx,
     const uint8_t ** data,

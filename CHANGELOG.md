@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `ktx_get_image_offset` (wraps `ktxTexture_GetImageOffset`)
+- `ktx_get_image_size` (wraps `ktxTexture_GetImageSize`)
 ### Changed
 - KTX-Software was updated to recent dev version (post 4.1.0-rc3)
 
