@@ -151,6 +151,9 @@ KTX_UNITY_API void ktx_get_data(
  */
 KTX_UNITY_API KTX_error_code ktx_copy_data_levels_reverted(
     ktxTexture* ktx,
+    uint32_t startLevel,
+    uint32_t layer,
+    uint32_t faceSlice,
     uint8_t * dst,
     uint32_t dst_length
     )
@@ -158,16 +161,14 @@ KTX_UNITY_API KTX_error_code ktx_copy_data_levels_reverted(
     size_t dst_offset = 0;
     KTX_error_code result;
 
-    if(ktx->dataSize>dst_length) return KTX_FILE_OVERFLOW;
-
-    for (ktx_uint32_t level = 0; level < ktx->numLevels; level++)
+    for (ktx_uint32_t level = startLevel; level < ktx->numLevels; level++)
     {
         size_t offset;
         result = ktxTexture_GetImageOffset(
             ktx,
             level,
-            0, //layer
-            0, //faceSlice
+            layer,
+            faceSlice,
             &offset
             );
         if(result!=KTX_SUCCESS) return result;
