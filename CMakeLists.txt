@@ -17,6 +17,13 @@ endif()
 
 add_library(ktx_unity ${UNITY_TYPE}
     src/ktx_c_binding.cpp
+    src/KtxUnityPlugin.cpp
+    )
+
+target_compile_features(ktx_unity PRIVATE cxx_std_17)
+
+target_include_directories(ktx_unity PRIVATE
+        Unity
 )
 
 target_link_libraries(ktx_unity
