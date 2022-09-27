@@ -10,11 +10,11 @@ include(CMakeDependentOption)
 
 CMAKE_DEPENDENT_OPTION( KTX_UNITY_FEATURE_VULKAN
     "Enable Vulkan texture upload"
-    ON
+    OFF # TODO: Enable by default once feature is stable
     "NOT IOS;NOT EMSCRIPTEN"
     OFF
     )
-option( KTX_UNITY_FEATURE_OPENGL "Enable OpenGL texture upload" ON )
+option( KTX_UNITY_FEATURE_OPENGL "Enable OpenGL texture upload" OFF )
 
 if(APPLE)
     # Signing
