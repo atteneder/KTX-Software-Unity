@@ -21,7 +21,9 @@
 #include <math.h>
 #include <unordered_map>
 
-#include <OpenGL/gl3.h>
+#ifdef KTX_UNITY_FEATURE_OPENGL
+#include "GL/glcorearb.h"
+#endif
 
 typedef struct ktxTextureResult {
     void* texture = 0;
