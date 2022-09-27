@@ -39,16 +39,21 @@ jobs:
       run: cmake -B build_ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS -DKTX_EMBED_BITCODE=ON
     - name: build_ios
       run: cmake --build build_ios --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO
+    - name: build_ios_simulator
+      run: cmake --build build-ios --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator
 
     - name: package_apple
       run: |
         mkdir ktx_unity_apple
         mkdir ktx_unity_apple/x86_64
         mv build_mac/ktx_unity.bundle ktx_unity_apple/x86_64
-        mkdir ktx_unity_apple/iOS
+        mkdir -p ktx_unity_apple/iOS/simulator
         mv build_ios/MinSizeRel-iphoneos/libktx_unity.a ktx_unity_apple/iOS
         mv build_ios/KTX-Software/MinSizeRel-iphoneos/libktx_read.a ktx_unity_apple/iOS
         mv build_ios/KTX-Software/interface/basisu_c_binding/MinSizeRel-iphoneos/libobj_basisu_cbind.a ktx_unity_apple/iOS
+        mv build_ios/MinSizeRel-iphonesimulator/libktx_unity.a ktx_unity_apple/iOS/simulator
+        mv build_ios/KTX-Software/MinSizeRel-iphonesimulator/libktx_read.a ktx_unity_apple/iOS/simulator
+        mv build_ios/KTX-Software/interface/basisu_c_binding/MinSizeRel-iphonesimulator/libobj_basisu_cbind.a ktx_unity_apple/iOS/simulator
     - uses: actions/upload-artifact@v2
       with:
         name: ktx_unity_apple
