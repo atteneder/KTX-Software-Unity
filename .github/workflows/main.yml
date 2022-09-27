@@ -40,7 +40,7 @@ jobs:
     - name: build_ios
       run: cmake --build build_ios --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO
     - name: build_ios_simulator
-      run: cmake --build build-ios --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator
+      run: cmake --build build_ios --config MinSizeRel --target ktx_unity -- ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator
 
     - name: package_apple
       run: |
