@@ -4,12 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2022-11-28
 ### Added
 - `ktx_get_image_offset` (wraps `ktxTexture_GetImageOffset`)
 - `ktx_get_image_size` (wraps `ktxTexture_GetImageSize`)
 - `ktx_get_baseDepth`
-- Unity Plugin implementation that enables uploading textures directly via native Graphics API 
+- Experimental Unity Plugin implementation that enables uploading textures directly via native Graphics API
+  - OpenGL (working with inaccurate sampling; enable via `KTX_UNITY_FEATURE_OPENGL` CMake option)
+  - Vulkan (broken; WIP; enable via `KTX_UNITY_FEATURE_VULKAN` CMake option)
 ### Changed
 - KTX-Software was updated to recent dev version (post 4.1.0-rc3)
 - Added parameters `startLevel`,`layer` and `faceSlice` to `ktx_copy_data_levels_reverted`, so you can select a specific layer/face/slice and its level(s) to copy.
