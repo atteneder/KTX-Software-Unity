@@ -328,7 +328,7 @@ jobs:
         with:
           name: ktx_unity.zip
           path: ktx_unity.zip
-      - uses: geekyeggo/delete-artifact@v1
+      - uses: geekyeggo/delete-artifact@v2
         with:
           name: |
             ktx_unity_apple
