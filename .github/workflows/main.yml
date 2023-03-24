@@ -63,7 +63,7 @@ jobs:
         path: ktx_unity_apple
 
   windows:
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
     - uses: actions/checkout@v3
       with:
@@ -71,7 +71,7 @@ jobs:
         lfs: true
 
     - name: configure_win_64
-      run: cmake . -G "Visual Studio 16 2019" -A x64 -Bbuild_win_64
+      run: cmake . -G "Visual Studio 17 2022" -A x64 -Bbuild_win_64
     - name: build_win_64
       run: cmake --build build_win_64 --config MinSizeRel --target ktx_unity
     # Tests don't work / are not built yet
@@ -80,22 +80,22 @@ jobs:
 
     # Universal Windows Platform
     - name: configure_uwp_arm64
-      run: cmake . -G "Visual Studio 16 2019" -A ARM64 -Bbuild_uwp_arm64 -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
+      run: cmake . -G "Visual Studio 17 2022" -A ARM64 -Bbuild_uwp_arm64 -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
     - name: build_uwp_arm64
       run: cmake --build build_uwp_arm64 --config MinSizeRel --target ktx_unity
 
     - name: configure_uwp_arm
-      run: cmake . -G "Visual Studio 16 2019" -A ARM -Bbuild_uwp_arm -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
+      run: cmake . -G "Visual Studio 17 2022" -A ARM -Bbuild_uwp_arm -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
     - name: build_uwp_arm
       run: cmake --build build_uwp_arm --config MinSizeRel --target ktx_unity
 
     - name: configure_uwp_x64
-      run: cmake . -G "Visual Studio 16 2019" -A x64 -Bbuild_uwp_x64 -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
+      run: cmake . -G "Visual Studio 17 2022" -A x64 -Bbuild_uwp_x64 -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
     - name: build_uwp_x64
       run: cmake --build build_uwp_x64 --config MinSizeRel --target ktx_unity
 
     - name: configure_uwp_x86
-      run: cmake . -G "Visual Studio 16 2019" -A Win32 -Bbuild_uwp_x86 -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
+      run: cmake . -G "Visual Studio 17 2022" -A Win32 -Bbuild_uwp_x86 -DCMAKE_SYSTEM_NAME:String=WindowsStore -DCMAKE_SYSTEM_VERSION:String="10.0"
     - name: build_uwp_x86
       run: cmake --build build_uwp_x86 --config MinSizeRel --target ktx_unity
 
@@ -118,7 +118,7 @@ jobs:
 
     ## No 32 bit support, since KTX-Software does not provide it
     # - name: configure_win_32
-    #   run: cmake . -G "Visual Studio 16 2019" -A Win32 -Bbuild_win_32
+    #   run: cmake . -G "Visual Studio 17 2022" -A Win32 -Bbuild_win_32
     # - name: build_win_32
     #   run: cmake --build build_win_32 --config MinSizeRel --target ktx_unity
     # - uses: actions/upload-artifact@v3
