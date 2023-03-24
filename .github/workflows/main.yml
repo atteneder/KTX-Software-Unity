@@ -302,7 +302,7 @@ jobs:
   combine:
     name: combine artifacts
     runs-on: ubuntu-20.04
-    needs: [mac, windows, linux, linux_legacy]
+    needs: [mac, windows, linux, linux_emscripten_3, linux_legacy]
     steps:
       - name: download artifacts
         uses: actions/download-artifact@v2
