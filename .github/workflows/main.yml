@@ -155,7 +155,7 @@ jobs:
     # Emscripten
     - name: Setup cache
       id: cache-system-libraries
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{env.EM_2_CACHE_FOLDER}}
         key: ${{env.EM_2_VERSION}}-${{ runner.os }}
@@ -273,7 +273,7 @@ jobs:
     # Emscripten legacy
     - name: Setup cache
       id: cache-system-libraries
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{env.EM_1_CACHE_FOLDER}}
         key: ${{env.EM_1_VERSION}}-${{ runner.os }}
