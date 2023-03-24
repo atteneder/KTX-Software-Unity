@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Emscripten 3.1.8 build (for Unity 2022.2 and newer)
 ### Changed
 - Updated checkout action to version 3
+- Updated upload-artifact action to version 3
 - Updated mymindstorm/setup-emsdk action to version 12
 ### Fixed
 - Use alternative Emscripten action for legacy build that's able to setup version 1.38.48-fastcomp

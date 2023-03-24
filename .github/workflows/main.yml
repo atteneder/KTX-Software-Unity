@@ -57,7 +57,7 @@ jobs:
         mv build_ios/MinSizeRel-iphonesimulator/libktx_unity.a ktx_unity_apple/iOS/simulator
         mv build_ios/KTX-Software/MinSizeRel-iphonesimulator/libktx_read.a ktx_unity_apple/iOS/simulator
         mv build_ios/KTX-Software/interface/basisu_c_binding/MinSizeRel-iphonesimulator/libobj_basisu_cbind.a ktx_unity_apple/iOS/simulator
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: ktx_unity_apple
         path: ktx_unity_apple
@@ -111,7 +111,7 @@ jobs:
         mv build_uwp_arm\MinSizeRel\ktx_unity.dll ktx_unity_win/WSA/ARM
         mv build_uwp_x64\MinSizeRel\ktx_unity.dll ktx_unity_win/WSA/x64
         mv build_uwp_x86\MinSizeRel\ktx_unity.dll ktx_unity_win/WSA/x86
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: ktx_unity_win
         path: ktx_unity_win
@@ -121,7 +121,7 @@ jobs:
     #   run: cmake . -G "Visual Studio 16 2019" -A Win32 -Bbuild_win_32
     # - name: build_win_32
     #   run: cmake --build build_win_32 --config MinSizeRel --target ktx_unity
-    # - uses: actions/upload-artifact@v2
+    # - uses: actions/upload-artifact@v3
     #   with:
     #     name: ktx_unity_win_32
     #     path: build_win_32\MinSizeRel\ktx_unity.dll
@@ -213,7 +213,7 @@ jobs:
         mv build_android_armeabi-v7a/libktx_unity.so ktx_unity_linux/Android/libs/armeabi-v7a
         # mkdir -p ktx_unity_linux/x86
         # mv build_linux_32/libktx_unity.so ktx_unity_linux/x86
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: ktx_unity_linux
         path: ktx_unity_linux
@@ -255,7 +255,7 @@ jobs:
         mv build_web/KTX-Software/libktx_read.bc ktx_unity_linux_emscripten_3/WebGL/libktx_read_3.bc
         mv build_web/KTX-Software/interface/basisu_c_binding/libobj_basisu_cbind.bc ktx_unity_linux_emscripten_3/WebGL/libobj_basisu_cbind_3.bc
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: ktx_unity_linux_emscripten_3
         path: ktx_unity_linux_emscripten_3
@@ -294,7 +294,7 @@ jobs:
         mv build_web/KTX-Software/libktx_read.bc ktx_unity_linux_legacy/WebGL
         mv build_web/KTX-Software/interface/basisu_c_binding/libobj_basisu_cbind.bc ktx_unity_linux_legacy/WebGL
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: ktx_unity_linux_legacy
         path: ktx_unity_linux_legacy
@@ -326,7 +326,7 @@ jobs:
         with:
           files: ktx_unity.zip
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ktx_unity.zip
           path: ktx_unity.zip
