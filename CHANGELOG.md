@@ -8,9 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Emscripten 3.1.8 build (for Unity 2022.2 and newer)
 ### Changed
-- Updated checkout action to version 3
-- Updated upload-artifact action to version 3
-- Updated cache action to version 3
+- Updated GitHub actions checkout, upload-artifact, cache and download-artifact to version 3
 - Updated mymindstorm/setup-emsdk action to version 12
 - Update windows builds to use Visual Studio 2022 on windows-2022
 ### Fixed
