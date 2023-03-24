@@ -13,12 +13,15 @@ on:
   workflow_dispatch:
 
 env:
+  # Emscripten version for Unity 2022.2 or newer
+  EM_3_VERSION: 3.1.8
+  EM_3_CACHE_FOLDER: 'emsdk-3-cache'
   # Emscripten version that comes with Unity 2021.2
-  EM_VERSION: 2.0.19
-  EM_CACHE_FOLDER: 'emsdk-cache'
+  EM_2_VERSION: 2.0.19
+  EM_2_CACHE_FOLDER: 'emsdk-2-cache'
   # Emscripten version that comes with older Unity versions
-  EM_LEGACY_VERSION: 1.38.48-fastcomp
-  EM_LEGACY_CACHE_FOLDER: 'emsdk-legacy-cache'
+  EM_1_VERSION: 1.38.48-fastcomp
+  EM_1_CACHE_FOLDER: 'emsdk-1-cache'
 
 jobs:
   mac:
@@ -154,12 +157,13 @@ jobs:
       id: cache-system-libraries
       uses: actions/cache@v2
       with:
-        path: ${{env.EM_CACHE_FOLDER}}
-        key: ${{env.EM_VERSION}}-${{ runner.os }}
-    - uses: mymindstorm/setup-emsdk@v10
+        path: ${{env.EM_2_CACHE_FOLDER}}
+        key: ${{env.EM_2_VERSION}}-${{ runner.os }}
+    - name: setup Emscripten
+      uses: mymindstorm/setup-emsdk@v10
       with:
-        version: ${{env.EM_VERSION}}
-        actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+        version: ${{env.EM_2_VERSION}}
+        actions-cache-folder: ${{env.EM_2_CACHE_FOLDER}}
     - name: configure_wasm
       run: emcmake cmake -B build_web
     - name: build_wasm
@@ -214,6 +218,50 @@ jobs:
         name: ktx_unity_linux
         path: ktx_unity_linux
 
+
+
+  linux_emscripten_3:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+        lfs: true
+    - name: Setup cache
+      id: cache-system-libraries
+      uses: actions/cache@v3
+      with:
+        path: ${{env.EM_3_CACHE_FOLDER}}
+        key: ${{env.EM_3_VERSION}}-${{ runner.os }}
+
+    # Emscripten 3
+    - name: setup Emscripten
+      uses: mymindstorm/setup-emsdk@v12
+      with:
+        version: ${{env.EM_3_VERSION}}
+        actions-cache-folder: ${{env.EM_3_CACHE_FOLDER}}
+    - name: configure_wasm
+      run: >
+        EMSCRIPTEN="$EMSDK/upstream/emscripten" emcmake cmake -B build_web
+        -DCMAKE_BUILD_TYPE=MinSizeRel
+    - name: build_wasm
+      run: cmake --build build_web --target ktx_unity
+
+    # linux_emscripten_3 artifact 
+    - name: package_linux_emscripten_3
+      run: |
+        mkdir -p ktx_unity_linux_emscripten_3/WebGL
+        mv build_web/libktx_unity.bc ktx_unity_linux_emscripten_3/WebGL/libktx_unity_3.bc
+        mv build_web/KTX-Software/libktx_read.bc ktx_unity_linux_emscripten_3/WebGL/libktx_read_3.bc
+        mv build_web/KTX-Software/interface/basisu_c_binding/libobj_basisu_cbind.bc ktx_unity_linux_emscripten_3/WebGL/libobj_basisu_cbind_3.bc
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ktx_unity_linux_emscripten_3
+        path: ktx_unity_linux_emscripten_3
+
+
+
   linux_legacy:
     runs-on: ubuntu-20.04
     steps:
@@ -227,12 +275,12 @@ jobs:
       id: cache-system-libraries
       uses: actions/cache@v2
       with:
-        path: ${{env.EM_LEGACY_CACHE_FOLDER}}
-        key: ${{env.EM_LEGACY_VERSION}}-${{ runner.os }}
+        path: ${{env.EM_1_CACHE_FOLDER}}
+        key: ${{env.EM_1_VERSION}}-${{ runner.os }}
     - uses: mymindstorm/setup-emsdk@v10
       with:
-        version: ${{env.EM_LEGACY_VERSION}}
-        actions-cache-folder: ${{env.EM_LEGACY_CACHE_FOLDER}}
+        version: ${{env.EM_1_VERSION}}
+        actions-cache-folder: ${{env.EM_1_CACHE_FOLDER}}
     - name: configure_wasm
       run: emcmake cmake -B build_web -DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1
     - name: build_wasm
@@ -269,6 +317,7 @@ jobs:
           cp -r artifacts/ktx_unity_apple/* ktx_unity
           cp -r artifacts/ktx_unity_win/* ktx_unity
           cp -r artifacts/ktx_unity_linux/* ktx_unity
+          cp -r artifacts/ktx_unity_linux_emscripten_3/* ktx_unity
           cp -r artifacts/ktx_unity_linux_legacy/* ktx_unity
       - name: zip
         run: zip -r ktx_unity.zip ktx_unity
@@ -287,4 +336,5 @@ jobs:
             ktx_unity_apple
             ktx_unity_win
             ktx_unity_linux
+            ktx_unity_linux_emscripten_3
             ktx_unity_linux_legacy
