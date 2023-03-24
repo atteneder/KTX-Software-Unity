@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2023-03-24
+### Added
+- Emscripten 3.1.8 build (for Unity 2022.2 and newer)
+### Changed
+- Updated GitHub actions checkout, upload-artifact, cache and download-artifact to version 3
+- Updated mymindstorm/setup-emsdk action to version 12
+- Update windows builds to use Visual Studio 2022 on windows-2022
+### Fixed
+- Use alternative Emscripten action for legacy build that's able to setup version 1.38.48-fastcomp
+
 ## [1.0.0] - 2022-11-28
 ### Added
 - `ktx_get_image_offset` (wraps `ktxTexture_GetImageOffset`)
