@@ -160,7 +160,7 @@ jobs:
         path: ${{env.EM_2_CACHE_FOLDER}}
         key: ${{env.EM_2_VERSION}}-${{ runner.os }}
     - name: setup Emscripten
-      uses: mymindstorm/setup-emsdk@v10
+      uses: mymindstorm/setup-emsdk@v12
       with:
         version: ${{env.EM_2_VERSION}}
         actions-cache-folder: ${{env.EM_2_CACHE_FOLDER}}
@@ -277,7 +277,7 @@ jobs:
       with:
         path: ${{env.EM_1_CACHE_FOLDER}}
         key: ${{env.EM_1_VERSION}}-${{ runner.os }}
-    - uses: mymindstorm/setup-emsdk@v10
+    - uses: mymindstorm/setup-emsdk@v12
       with:
         version: ${{env.EM_1_VERSION}}
         actions-cache-folder: ${{env.EM_1_CACHE_FOLDER}}
