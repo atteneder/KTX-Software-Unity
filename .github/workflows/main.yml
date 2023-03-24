@@ -250,15 +250,15 @@ jobs:
     # linux_emscripten_3 artifact 
     - name: package_linux_emscripten_3
       run: |
-        mkdir -p ktx_unity_linux_emscripten_3/WebGL
-        mv build_web/libktx_unity.a ktx_unity_linux_emscripten_3/WebGL/libktx_unity_3.a
-        mv build_web/KTX-Software/libktx_read.a ktx_unity_linux_emscripten_3/WebGL/libktx_read_3.a
-        mv build_web/KTX-Software/interface/basisu_c_binding/libobj_basisu_cbind.a ktx_unity_linux_emscripten_3/WebGL/libobj_basisu_cbind_3.a
+        mkdir -p ktx_unity_emscripten_3/WebGL
+        mv build_web/libktx_unity.a ktx_unity_emscripten_3/WebGL/libktx_unity_3.a
+        mv build_web/KTX-Software/libktx_read.a ktx_unity_emscripten_3/WebGL/libktx_read_3.a
+        mv build_web/KTX-Software/interface/basisu_c_binding/libobj_basisu_cbind.a ktx_unity_emscripten_3/WebGL/libobj_basisu_cbind_3.a
 
     - uses: actions/upload-artifact@v3
       with:
-        name: ktx_unity_linux_emscripten_3
-        path: ktx_unity_linux_emscripten_3
+        name: ktx_unity_emscripten_3
+        path: ktx_unity_emscripten_3
 
 
 
@@ -317,7 +317,7 @@ jobs:
           cp -r artifacts/ktx_unity_apple/* ktx_unity
           cp -r artifacts/ktx_unity_win/* ktx_unity
           cp -r artifacts/ktx_unity_linux/* ktx_unity
-          cp -r artifacts/ktx_unity_linux_emscripten_3/* ktx_unity
+          cp -r artifacts/ktx_unity_emscripten_3/* ktx_unity
           cp -r artifacts/ktx_unity_linux_legacy/* ktx_unity
       - name: zip
         run: zip -r ktx_unity.zip ktx_unity
@@ -336,5 +336,5 @@ jobs:
             ktx_unity_apple
             ktx_unity_win
             ktx_unity_linux
-            ktx_unity_linux_emscripten_3
+            ktx_unity_emscripten_3
             ktx_unity_linux_legacy
