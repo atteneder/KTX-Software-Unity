@@ -165,7 +165,7 @@ jobs:
         version: ${{env.EM_2_VERSION}}
         actions-cache-folder: ${{env.EM_2_CACHE_FOLDER}}
     - name: configure_wasm
-      run: emcmake cmake -B build_web
+      run: emcmake cmake -B build_web -DCMAKE_BUILD_TYPE=MinSizeRel
     - name: build_wasm
       run: cmake --build build_web --target ktx_unity
 
@@ -241,9 +241,7 @@ jobs:
         version: ${{env.EM_3_VERSION}}
         actions-cache-folder: ${{env.EM_3_CACHE_FOLDER}}
     - name: configure_wasm
-      run: >
-        EMSCRIPTEN="$EMSDK/upstream/emscripten" emcmake cmake -B build_web
-        -DCMAKE_BUILD_TYPE=MinSizeRel
+      run: emcmake cmake -B build_web -DCMAKE_BUILD_TYPE=MinSizeRel
     - name: build_wasm
       run: cmake --build build_web --target ktx_unity
 
@@ -282,7 +280,7 @@ jobs:
       with:
         sdk: ${{env.EM_1_VERSION}}
     - name: configure_wasm
-      run: emcmake cmake -B build_web -DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1
+      run: emcmake cmake -B build_web -DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1 -DCMAKE_BUILD_TYPE=MinSizeRel
     - name: build_wasm
       run: cmake --build build_web --target ktx_unity
 
