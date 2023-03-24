@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated checkout action to version 3
 - Updated mymindstorm/setup-emsdk action to version 12
+### Fixed
+- Use alternative Emscripten action for legacy build that's able to setup version 1.38.48-fastcomp
 
 ## [1.0.0] - 2022-11-28
 ### Added

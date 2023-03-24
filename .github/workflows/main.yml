@@ -277,10 +277,10 @@ jobs:
       with:
         path: ${{env.EM_1_CACHE_FOLDER}}
         key: ${{env.EM_1_VERSION}}-${{ runner.os }}
-    - uses: mymindstorm/setup-emsdk@v12
+    - name: setup Emscripten 1
+      uses: numworks/setup-emscripten@latest
       with:
-        version: ${{env.EM_1_VERSION}}
-        actions-cache-folder: ${{env.EM_1_CACHE_FOLDER}}
+        sdk: ${{env.EM_1_VERSION}}
     - name: configure_wasm
       run: emcmake cmake -B build_web -DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1
     - name: build_wasm
