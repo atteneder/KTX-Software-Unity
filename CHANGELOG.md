@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Experimental Unity Plugin implementation that enables uploading textures directly via native Graphics API
   - OpenGL (working with inaccurate sampling; enable via `KTX_UNITY_FEATURE_OPENGL` CMake option)
   - Vulkan (broken; WIP; enable via `KTX_UNITY_FEATURE_VULKAN` CMake option)
+- (CI): iOS Simulator binaries
 ### Changed
 - KTX-Software was updated to recent dev version (post 4.1.0-rc3)
 - Added parameters `startLevel`,`layer` and `faceSlice` to `ktx_copy_data_levels_reverted`, so you can select a specific layer/face/slice and its level(s) to copy.
